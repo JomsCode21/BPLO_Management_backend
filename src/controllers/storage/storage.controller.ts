@@ -47,6 +47,9 @@ export const renderFile = async (req: Request, res: Response) => {
     "Content-Type",
     object.ContentType || "application/octet-stream",
   );
+  // The React app is served from a different local/deployed origin than the
+  // API, so images need an explicit resource-sharing policy.
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   res.setHeader("Cache-Control", "private, max-age=3600");
   body.on("error", (error) => res.destroy(error));
   body.pipe(res);
