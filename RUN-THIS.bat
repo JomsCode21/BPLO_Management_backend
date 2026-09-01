@@ -1,0 +1,3 @@
+@echo off
+@echo Installing git hooks...
+git config core.hooksPath .githooks

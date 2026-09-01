@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Running npm build before pushing..."
+npm run build
+
+if [ $? -ne 0 ]; then
+  echo "Build failed! Push aborted."
+  exit 1
+else
+  echo "Build successful! Proceeding with push..."
+fi

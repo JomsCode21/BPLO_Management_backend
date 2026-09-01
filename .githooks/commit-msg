@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Commit message file
+COMMIT_MSG_FILE=$1
+
+# Conventional Commit regex
+CONVENTIONAL_REGEX="^(feat|fix|chore|docs|update|style|refactor|perf|test|ci|build|revert)(\([a-zA-Z0-9_-]+\))?!?: .+"
+
+# Read commit message
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Check if commit message follows Conventional Commit format
+if ! echo "$COMMIT_MSG" | grep -qE "$CONVENTIONAL_REGEX"; then
+    echo "❌ ERROR: Commit message does not follow Conventional Commit format!" >&2
+    echo "🔹 Format: <type>(<scope>): <description>" >&2
+    echo "🔹 Example: feat(auth): add login functionality" >&2
+    echo "🔹 Allowed types: feat, fix, chore, update, docs, style, refactor, perf, test, ci, build, revert" >&2
+    exit 1
+fi
+
+echo "✅ Commit message follows Conventional Commit standard."
+exit 0
