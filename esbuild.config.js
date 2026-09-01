@@ -33,7 +33,6 @@ esbuild
       "mongodb-client-encryption",
       "@mongodb-js/zstd",
       "@aws-sdk/credential-providers",
-      "gcp-metadata",
       "snappy",
       "socks",
       "aws4",
