@@ -24,6 +24,7 @@ import mainTreasurerRouter from "@/routes/main-treasurer/main-treasurer.route";
 import ownerRouter from "@/routes/owner/owner.route";
 import superAdminRouter from "@/routes/super_admin/super_admin.route";
 import { tokenRouter } from "@/routes/token/token.route";
+import { storageRouter } from "@/routes/storage/storage.route";
 import { seedSuperAdminFromEnv } from "@/services/account/seed-super-admin.service";
 import mongoSanitize from "@/utils/sanitizer/mongo-sanitizer";
 
@@ -80,6 +81,7 @@ const bootstrap = async () => {
   // Routes
   app.use("/api/auth", authRouter);
   app.use("/api/token", tokenRouter);
+  app.use("/api/uploads", storageRouter);
   app.use("/api/super-admin", superAdminRouter);
   app.use("/api/bplo-admin", bploAdminRouter);
   app.use("/api/inspector", inspectorRouter);

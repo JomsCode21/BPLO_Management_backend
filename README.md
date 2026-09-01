@@ -69,6 +69,12 @@ GLOBAL_RATE_LIMIT_MAX=100
 RECAPTCHA_SECRET_KEY=your-recaptcha-secret
 PAYMENT_QR_SECRET=optional-secret-used-to-sign-payment-qr-data
 
+# Cloudflare R2 object storage (server-side only)
+R2_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
+R2_ACCESS_KEY_ID=your-r2-access-key-id
+R2_SECRET_ACCESS_KEY=your-r2-secret-access-key
+R2_BUCKET=your-r2-bucket-name
+
 # Optional first super-admin account
 SEED_SUPER_ADMIN=false
 SUPER_ADMIN_EMAIL=admin@example.com
@@ -142,4 +148,3 @@ src/
 - Set `NODE_ENV=production` and configure every deployed frontend URL in `CORS_ORIGINS` before deployment.
 - Use strong, distinct JWT secrets and a production MongoDB URI with restricted access.
 - The server enables Helmet, global rate limiting, MongoDB query sanitization, strict Mongoose queries, and credentialed CORS.
-

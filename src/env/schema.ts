@@ -38,6 +38,12 @@ export const envSchema = defineEnv({
   payments: {
     PAYMENT_QR_SECRET: str(),
   },
+  storage: {
+    R2_ENDPOINT: str(),
+    R2_ACCESS_KEY_ID: str(),
+    R2_SECRET_ACCESS_KEY: str(),
+    R2_BUCKET: str(),
+  },
   seed: {
     SEED_SUPER_ADMIN: bool(),
     SUPER_ADMIN_EMAIL: str(),
