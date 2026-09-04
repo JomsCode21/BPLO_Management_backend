@@ -199,10 +199,7 @@ export const register = async (
     if (!gender) throw new AppError("Gender is required.", 400);
     if (!email) throw new AppError("Email is required.", 400);
     if (!password) throw new AppError("Password is required.", 400);
-    await verifyRecaptchaOrThrow({
-      remoteIp: req.ip,
-      token: recaptchaToken,
-    });
+    await verifyRecaptchaOrThrow({ token: recaptchaToken });
 
     // Check if the email already exists
     let account = await findAccountS({ email });
@@ -288,10 +285,7 @@ export const login = async (req: Request, res: Response) => {
   // Validate the data
   if (!email) throw new AppError("Email is required.", 400);
   if (!password) throw new AppError("Password is required.", 400);
-  await verifyRecaptchaOrThrow({
-    remoteIp: req.ip,
-    token: recaptchaToken,
-  });
+  await verifyRecaptchaOrThrow({ token: recaptchaToken });
 
   // Find the account by email
   const account = await findAccountS({ email });
@@ -401,10 +395,7 @@ export const googleAuth = async (
 
     // Validate the token
     if (!token) return next(new AppError("Google token is required.", 400));
-    await verifyRecaptchaOrThrow({
-      remoteIp: req.ip,
-      token: recaptchaToken,
-    });
+    await verifyRecaptchaOrThrow({ token: recaptchaToken });
 
     const tokenInfo = await validateGoogleAccessToken(token);
     const googleUserInfo = await fetchGoogleUserInfo(token);
@@ -499,10 +490,7 @@ export const forgotPassword = async (
     if (!email) {
       return next(new AppError("Email is required.", 400));
     }
-    await verifyRecaptchaOrThrow({
-      remoteIp: req.ip,
-      token: recaptchaToken,
-    });
+    await verifyRecaptchaOrThrow({ token: recaptchaToken });
 
     // Check if account exists and if it's a Google account
     const account = await findAccountS({ email });

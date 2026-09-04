@@ -24,10 +24,8 @@ const getRecaptchaSecretKey = () => {
 
 // Verifies a reCAPTCHA token against Google and throws on any failure.
 export const verifyRecaptchaOrThrow = async ({
-  remoteIp,
   token,
 }: {
-  remoteIp?: string;
   token?: string;
 }) => {
   const trimmedToken = token?.trim();
@@ -43,10 +41,6 @@ export const verifyRecaptchaOrThrow = async ({
     response: trimmedToken,
     secret: getRecaptchaSecretKey(),
   });
-
-  if (remoteIp) {
-    body.append("remoteip", remoteIp);
-  }
 
   let verificationResponse: Response;
 
@@ -76,9 +70,9 @@ export const verifyRecaptchaOrThrow = async ({
     (await verificationResponse.json()) as RecaptchaVerificationResponse;
 
   if (!result.success) {
-    if (!securityEnv.isProduction) {
-      console.warn("reCAPTCHA rejected request:", result["error-codes"] ?? []);
-    }
+    // Google's reason codes are safe operational diagnostics and help identify
+    // a site-key/secret mismatch in deployed environments.
+    console.warn("reCAPTCHA rejected request:", result["error-codes"] ?? []);
 
     throw new AppError("Security verification failed. Please try again.", 403);
   }
