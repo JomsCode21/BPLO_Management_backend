@@ -35,6 +35,11 @@ export const envSchema = defineEnv({
     GLOBAL_RATE_LIMIT_MAX: int(),
     RECAPTCHA_SECRET_KEY: str(),
   },
+  recaptchaEnterprise: {
+    RECAPTCHA_ENTERPRISE_PROJECT_ID: str(),
+    RECAPTCHA_ENTERPRISE_API_KEY: str(),
+    RECAPTCHA_ENTERPRISE_SITE_KEY: str(),
+  },
   payments: {
     PAYMENT_QR_SECRET: str(),
   },
